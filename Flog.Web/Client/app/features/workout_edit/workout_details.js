@@ -5,8 +5,20 @@
 
     function workoutDetailsController($scope, $routeParams) {
 
-        this.workoutId = $routeParams.workoutId;
+        var vm = this;
+        vm.workoutId = $routeParams.workoutId;
+        vm.exercises = [];
+        vm.addExercise = addExercise;
 
+        // This needs a list of exercises that for each one I can then pass into the exercise directive. I could also put the "Add" method on here and add a new
+        // exercise to this collection.
+
+        function addExercise() {
+
+            exercises.push({ id: '123' });
+        }
+
+       
     }
 
     angular.module('workoutEdit', [])
@@ -17,7 +29,7 @@
                 replace: true,
                 templateUrl: 'client/app/features/workout_edit/workout_details.html',
                 controller: controllerId,
-                controllerAs: 'ctrl'
+                controllerAs: 'vm'
             }
         })
         .controller(controllerId, ['$scope', '$routeParams', workoutDetailsController]);

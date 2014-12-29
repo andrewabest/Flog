@@ -15,12 +15,13 @@
 
     function workoutListController($scope, $location) {
 
+        var vm = this;
+        vm.begin = begin;
+
         function begin() {
             var workoutId = getWorkoutId();
             $location.path('/workouts/' + workoutId.toString());
         }
-
-        this.begin = begin;
     }
 
     var controllerId = 'workoutListController';
@@ -33,7 +34,7 @@
                 templateUrl: 'client/app/features/home/workout_list.html',
                 replace: true,
                 controller: controllerId,
-                controllerAs: 'ctrl'
+                controllerAs: 'vm'
             };
         })
         .controller(controllerId, ['$scope', '$location', workoutListController]);
