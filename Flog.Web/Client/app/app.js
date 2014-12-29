@@ -5,7 +5,8 @@
         'app',
         [
             'ngRoute',
-            'workoutList'
+            'home',
+            'workoutEdit'
         ]);
 
     app.config(['$routeProvider', configure]);
@@ -14,12 +15,12 @@
         
         $routeProvider
             .when('/workouts', {
-                templateUrl: 'client/app/features/workout.html',
-                controller: 'workout'
+                templateUrl: 'client/app/features/home/home.html',
+                controller: 'homeController'
             })
             .when('/workouts/:workoutId', {
-                templateUrl: 'client/app/features/workout.html',
-                controller: 'workout'
+                templateUrl: 'client/app/features/workout_edit/workout_edit.html',
+                controller: 'workoutEditController'
             })
             .otherwise({
                 redirectTo: '/workouts'

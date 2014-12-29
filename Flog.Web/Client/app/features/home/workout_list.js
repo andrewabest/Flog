@@ -1,6 +1,7 @@
 ﻿(function(angular) {
     'use strict';
 
+    
     // Shamelessley taken from http://stackoverflow.com/a/8809472/899705
     function getWorkoutId() {
         var d = new Date().getTime();
@@ -14,25 +15,27 @@
 
     function workoutListController($scope, $location) {
 
-        function add() {
+        function begin() {
             var workoutId = getWorkoutId();
             $location.path('/workouts/' + workoutId.toString());
         }
 
-        this.add = add;
+        this.begin = begin;
     }
 
-    angular.module('workoutList', [])
+    var controllerId = 'workoutListController';
+
+    angular.module('home', [])
         .directive('fgWorkoutList', function() {
             return {
                 restrict: 'E',
                 scope: {},
-                templateUrl: 'client/app/features/workout_list.html',
+                templateUrl: 'client/app/features/home/workout_list.html',
                 replace: true,
-                controller: 'workoutListController',
+                controller: controllerId,
                 controllerAs: 'ctrl'
             };
         })
-        .controller('workoutListController', ['$scope', '$location', workoutListController]);
+        .controller(controllerId, ['$scope', '$location', workoutListController]);
 
 })(angular);
