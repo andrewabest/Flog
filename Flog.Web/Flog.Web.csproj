@@ -90,12 +90,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\app\features\workout.js" />
     <Content Include="Client\app\features\workout_list.html" />
     <Content Include="Client\app\features\workout_list.js" />
     <Content Include="packages.config" />
     <Content Include="Client\app\app.js" />
     <Content Include="Client\content\site\site.css" />
     <Content Include="Client\index.html" />
+    <Content Include="Client\app\features\workout.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

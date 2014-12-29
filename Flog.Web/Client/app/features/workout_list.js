@@ -16,6 +16,8 @@
 
     function workoutListController($scope) {
         
+        // Add a function that will take us to the "Add Workout" component
+
     }
 
 })(angular);
