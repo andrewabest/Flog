@@ -90,10 +90,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\app\features\workout_list.html" />
+    <Content Include="Client\app\features\workout_list.js" />
     <Content Include="packages.config" />
     <Content Include="Client\app\app.js" />
-    <Content Include="Client\app\layout\shell.html" />
-    <Content Include="Client\app\layout\shell.js" />
     <Content Include="Client\content\site\site.css" />
     <Content Include="Client\index.html" />
     <None Include="Web.Debug.config">
@@ -115,7 +115,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Client\content\bootstrap\" />
     <Folder Include="Client\scripts\" />
   </ItemGroup>
   <PropertyGroup>

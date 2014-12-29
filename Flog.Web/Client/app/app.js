@@ -1,8 +1,8 @@
-﻿(function() {
+﻿(function (angular) {
     'use strict';
 
-    var app = angular.module('app', []);
+    angular.module('app', ['workoutList']);
 
-    app.run();
-
-})();
+    //var app = angular.module('app', ['workoutList']);
+    // app.run();
+})(angular);

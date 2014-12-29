@@ -12,7 +12,7 @@ namespace Flog.Web.Bundling
         public static readonly List<BundleFile> AppScripts = new List<BundleFile>
         {
             new BundleFile("~/client/app/app.js", minify: true),
-            new BundleFile("~/client/app/layout/shell.js", minify: true),
+            new BundleFile("~/client/app/features/workout_list.js", minify: true),
         };
     }
 }
