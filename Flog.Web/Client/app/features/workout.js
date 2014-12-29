@@ -3,9 +3,9 @@
     'use strict';
 
     angular.module('app')
-        .controller('workoutController', ['$scope', workoutController]);
+        .controller('workout', ['$scope', workout]);
 
-    function workoutController($scope) {
+    function workout($scope) {
     }
     
 })(angular);

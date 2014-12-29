@@ -1,7 +1,12 @@
 ﻿(function (angular) {
     'use strict';
 
-    var app = angular.module('app', ['ngRoute', 'workoutList']);
+    var app = angular.module(
+        'app',
+        [
+            'ngRoute',
+            'workoutList'
+        ]);
 
     app.config(['$routeProvider', configure]);
 
@@ -12,10 +17,10 @@
                 templateUrl: 'client/app/features/workout.html',
                 controller: 'workout'
             })
-            //.when('/workouts/:workoutId', {
-            //    templateUrl: 'client/app/features/workout.html',
-            //    controller: 'workout'
-            //})
+            .when('/workouts/:workoutId', {
+                templateUrl: 'client/app/features/workout.html',
+                controller: 'workout'
+            })
             .otherwise({
                 redirectTo: '/workouts'
             });
