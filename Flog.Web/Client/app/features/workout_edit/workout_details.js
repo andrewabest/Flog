@@ -9,16 +9,15 @@
         vm.workoutId = $routeParams.workoutId;
         vm.exercises = [];
         vm.addExercise = addExercise;
+        vm.addingExercise = false;
 
         // This needs a list of exercises that for each one I can then pass into the exercise directive. I could also put the "Add" method on here and add a new
         // exercise to this collection.
 
         function addExercise() {
 
-            exercises.push({ id: '123' });
+            vm.addingExercise = true;
         }
-
-       
     }
 
     angular.module('workoutEdit', [])

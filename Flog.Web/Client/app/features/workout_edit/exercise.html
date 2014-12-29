@@ -1,0 +1,24 @@
+﻿<div>
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>New Exercise</legend>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="exerciseName">Name</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="exerciseName" placeholder="Enter exercise name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="exerciseDescription">Description</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="exerciseDescription" placeholder="Enter a description">
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
+                <button type="submit" class="btn btn-primary" ng-click="vm.save()">Save</button>
+            </div>
+            
+        </fieldset>
+    </form>
+</div>
