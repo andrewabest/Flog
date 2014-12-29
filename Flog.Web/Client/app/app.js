@@ -27,6 +27,8 @@
             });
     }
 
+
+
     //var app = angular.module('app', ['workoutList']);
     // app.run();
 

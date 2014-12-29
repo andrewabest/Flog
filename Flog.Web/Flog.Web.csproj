@@ -90,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\app\autofocus.js" />
     <Content Include="Client\app\features\workout_edit\exercise.html" />
     <Content Include="Client\app\features\workout_edit\exercise.js" />
     <Content Include="Client\app\features\workout_edit\workout_details.html" />

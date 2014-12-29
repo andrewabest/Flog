@@ -3,15 +3,21 @@
     function exerciseController($scope) {
 
         var vm = this;
+        vm.exercise = {};
         vm.save = save;
         vm.cancel = cancel;
 
         function save() {
-            // construct the exercise object from the bound form data and supply it back to the parent somehow.
+
+            $scope.exercises.push(vm.exercise);
+            vm.exercise = {};
+            $scope.closecallback = false;
         }
 
         function cancel() {
-            // Now do I want to raise an event so that my parent can set its property to false?
+
+            vm.exercise = {};
+            $scope.closecallback = false;
         }
     }
 
@@ -21,11 +27,14 @@
         .directive('exercise', function() {
             return {
                 restrict: 'E',
-                scope: {},
+                scope: {
+                    exercises: "=",
+                    closecallback: "="
+                },
                 replace: true,
                 templateUrl: 'client/app/features/workout_edit/exercise.html',
                 controller: controllerId,
-                controllerAs: 'ctrl'
+                controllerAs: 'vm'
             }
         })
         .controller(controllerId, ['$scope', exerciseController]);
