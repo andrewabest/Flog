@@ -100,6 +100,7 @@
     <Content Include="Client\app\features\workout_edit\workout_edit.js" />
     <Content Include="Client\app\features\home\workout_list.html" />
     <Content Include="Client\app\features\home\workout_list.js" />
+    <Content Include="Client\app\showerrors.js" />
     <Content Include="packages.config" />
     <Content Include="Client\app\app.js" />
     <Content Include="Client\content\site\site.css" />

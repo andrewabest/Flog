@@ -23,7 +23,7 @@
 
     var controllerId = 'exerciseController';
 
-    angular.module('exercise', [])
+    angular.module('exercise', ['ui.bootstrap.showErrors'])
         .directive('fgExercise', function() {
             return {
                 restrict: 'E',
