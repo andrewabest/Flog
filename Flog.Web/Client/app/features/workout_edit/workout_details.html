@@ -15,12 +15,15 @@
         </div>
     </div>
     <div ng-repeat="exercise in vm.exercises">
-        <div class="row">
+        <div class="row" style="margin-bottom: 15px;">
             <div class="col-md-2">
                 <strong>{{exercise.name}}</strong>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9">
                 {{exercise.description}}
+            </div>
+            <div class="col-md-1">
+                <button ng-if="!vm.addingExercise" ng-click="vm.removeExercise(exercise)" class="confirmButton btn btn-danger" confirm-button>Remove</button>
             </div>
         </div>
     </div>
