@@ -6,7 +6,8 @@
         [
             'ngRoute',
             'home',
-            'workoutEdit'
+            'workoutEdit',
+            'exercise'
         ]);
 
     app.config(['$routeProvider', configure]);

@@ -23,8 +23,8 @@
 
     var controllerId = 'exerciseController';
 
-    angular.module('workoutEdit')
-        .directive('exercise', function() {
+    angular.module('exercise', [])
+        .directive('fgExercise', function() {
             return {
                 restrict: 'E',
                 scope: {

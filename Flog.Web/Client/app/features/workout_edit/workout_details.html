@@ -6,10 +6,29 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row" style="margin-bottom: 15px;">
+        <div class="col-md-12">
             <button ng-if="!vm.addingExercise" ng-click="vm.addExercise()" class="btn btn-success">Add Exercise</button>
-            <exercise ng-if="vm.addingExercise" exercises="vm.exercises" closecallback="vm.addingExercise"></exercise>
+            <div class="exerciseContainer">
+                <fg-exercise ng-if="vm.addingExercise" class="exercise" exercises="vm.exercises" closecallback="vm.addingExercise"></fg-exercise>
+            </div>
+        </div>
+    </div>
+    <div ng-repeat="exercise in vm.exercises">
+        <div class="row">
+            <div class="col-md-2">
+                <strong>{{exercise.name}}</strong>
+            </div>
+            <div class="col-md-10">
+                {{exercise.description}}
+            </div>
+        </div>
+    </div>
+    <div ng-if="!vm.addingExercise && vm.exercises.length == 0" class="row">
+        <div class="col-md-12">
+            <div class="alert alert-dismissable alert-warning">
+                No exercises have been added yet.
+            </div>
         </div>
     </div>
 </div>

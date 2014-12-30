@@ -20,7 +20,7 @@
         }
     }
 
-    angular.module('workoutEdit', [])
+    angular.module('workoutEdit', ['ngAnimate'])
         .directive('fgWorkoutDetails', function() {
             return {
                 restrict: 'E',
