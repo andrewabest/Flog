@@ -1,0 +1,25 @@
+﻿<div>
+    <form class="form-inline" name="setForm">
+        <fieldset>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight" ng-model="vm.set.weight" auto-focus />
+                </div>
+            </div>
+            <div class="form-group" show-errors>
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="reps" name="reps" placeholder="Reps" ng-model="vm.set.reps" required/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="rpe" name="rpe" placeholder="RPE" ng-model="vm.set.rpe" />
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
+                <button type="submit" class="btn btn-primary" ng-click="vm.save()" ng-disabled="setForm.$invalid">Save</button>
+            </div>
+        </fieldset>
+    </form>
+</div>

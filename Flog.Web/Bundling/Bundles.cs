@@ -22,6 +22,8 @@ namespace Flog.Web.Bundling
             new BundleFile("~/client/app/features/workout_edit/workout_edit.js", minify: true),
             new BundleFile("~/client/app/features/workout_edit/workout_details.js", minify: true),
             new BundleFile("~/client/app/features/workout_edit/exercise.js", minify: true),
+            new BundleFile("~/client/app/features/workout_edit/exercise_details.js", minify: true),
+            new BundleFile("~/client/app/features/workout_edit/set.js", minify: true),
         };
     }
 }

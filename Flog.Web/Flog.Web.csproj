@@ -94,6 +94,10 @@
     <Content Include="Client\app\confirmbutton.js" />
     <Content Include="Client\app\features\workout_edit\exercise.html" />
     <Content Include="Client\app\features\workout_edit\exercise.js" />
+    <Content Include="Client\app\features\workout_edit\exercise_details.html" />
+    <Content Include="Client\app\features\workout_edit\exercise_details.js" />
+    <Content Include="Client\app\features\workout_edit\set.html" />
+    <Content Include="Client\app\features\workout_edit\set.js" />
     <Content Include="Client\app\features\workout_edit\workout_details.html" />
     <Content Include="Client\app\features\workout_edit\workout_details.js" />
     <Content Include="Client\app\features\home\home.js" />

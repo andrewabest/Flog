@@ -1,0 +1,24 @@
+﻿<div style="border-bottom: 1px dashed #eee; margin-bottom: 15px;">
+    <div class="row" style="margin-bottom: 15px;">
+        <div class="col-md-2">
+            <strong>{{vm.exercise.name}}</strong>
+        </div>
+        <div class="col-md-6">
+            {{vm.exercise.description}}
+        </div>
+        <div class="col-md-4" style="text-align: right;">
+            <button ng-click="vm.addSet()" class="btn btn-success">Add Set</button>
+            <button ng-click="vm.remove()" class="confirmButton btn btn-danger" confirm-button>Remove</button>
+        </div>
+    </div>
+    <div ng-if="vm.addingSet" class="row" style="margin-bottom: 15px;">
+        <div class="col-md-12 well">
+            <fg-set ng-if="vm.addingSet" sets="vm.sets" closecallback="vm.addingSet"></fg-set>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 15px;" ng-repeat="set in vm.sets">
+        <div class="col-md-12">
+            <p>{{set.weight}} x {{set.reps}} @ {{set.rpe}} RPE</p>
+        </div>
+    </div>
+</div>
