@@ -13,10 +13,24 @@
         return uuid;
     };
 
-    function workoutListController($scope, $location) {
+    function workoutListController($scope, $location, workoutService) {
 
         var vm = this;
         vm.begin = begin;
+        vm.isbusy = false;
+        vm.workouts = [];
+
+        activate();
+
+        function activate() {
+
+            vm.isbusy = true;
+
+            workoutService.getWorkouts().then(function (data) {
+                vm.workouts = data;
+                vm.isbusy = false;
+            });
+        }
 
         function begin() {
             var workoutId = getWorkoutId();
@@ -37,6 +51,6 @@
                 controllerAs: 'vm'
             };
         })
-        .controller(controllerId, ['$scope', '$location', workoutListController]);
+        .controller(controllerId, ['$scope', '$location', 'workoutService', workoutListController]);
 
 })(angular);

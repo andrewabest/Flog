@@ -1,14 +1,27 @@
 ﻿<div>
-    <div class="page-header">
+    <div style="margin-top: 75px;">
         <div class="row">
-            <div class="col-md-12">
-                <h1>Workouts</h1>
+            <div class="col-md-12 well" style="margin-bottom: 0px;">
+                <button ng-click="vm.begin()" class="btn btn-success">Begin Workout</button>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <button ng-click="vm.begin()" class="btn btn-success">Begin Workout</button>
+        <div class="col-md-12">
+            <h1>Workouts</h1>
         </div>
     </div>
+    <div class="row" style="margin-bottom: 15px;">
+        <div class="col-md-12 well">
+            <div class="bs-component" ng-if="vm.isbusy">
+                <div class="progress progress-striped active">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+            </div>
+            <div ng-repeat="workout in vm.workouts">
+                {{workout.Id}}
+            </div>
+        </div>
+    </div>
+    
 </div>

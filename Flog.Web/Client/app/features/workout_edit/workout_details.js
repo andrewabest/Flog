@@ -3,13 +3,14 @@
 
     var controllerId = 'workoutDetailsController';
 
-    function workoutDetailsController($scope, $routeParams, workoutService) {
+    function workoutDetailsController($scope, $routeParams, $location, workoutService) {
 
         var vm = this;
         vm.workout = { id: $routeParams.workoutId, exercises: [] }
         vm.addExercise = addExercise;
         vm.addingExercise = false;
         vm.complete = complete;
+        vm.processing = false;
 
         function addExercise() {
 
@@ -18,7 +19,24 @@
 
         function complete() {
 
-            workoutService.completeWorkout(vm.workout);
+            vm.processing = true;
+
+            workoutService.completeWorkout(vm.workout).then(function(data) {
+                swal({
+                    title: "Workout Completed!",
+                    type: "success"
+                },
+                processingFinished);
+            });
+        }
+
+        function processingFinished(isConfirmed) {
+            
+            vm.processing = false;
+
+            $location.path('/workouts');
+            $location.replace();
+            $scope.$apply();
         }
     }
 
@@ -33,6 +51,6 @@
                 controllerAs: 'vm'
             }
         })
-        .controller(controllerId, ['$scope', '$routeParams', 'workoutService', workoutDetailsController]);
+        .controller(controllerId, ['$scope', '$routeParams', '$location', 'workoutService', workoutDetailsController]);
 
 })(angular);

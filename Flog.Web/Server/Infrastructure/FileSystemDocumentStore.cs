@@ -51,11 +51,18 @@ namespace Flog.Web.Server.Infrastructure
 
         private static string GetStorageLocation()
         {
-            return Path.Combine(
+            var path = Path.Combine(
                 Environment.GetFolderPath(
                     Environment.SpecialFolder.LocalApplicationData,
                     Environment.SpecialFolderOption.Create), 
                 "Flog");
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            return path;
         }
     }
 }

@@ -120,6 +120,8 @@
     <Content Include="Client\app\features\home\workout_list.js" />
     <Content Include="Client\app\services\workout_service.js" />
     <Content Include="Client\app\showerrors.js" />
+    <Content Include="Client\content\sweet-alert.css" />
+    <Content Include="Client\scripts\sweet-alert.min.js" />
     <Content Include="packages.config" />
     <Content Include="Client\app\app.js" />
     <Content Include="Client\content\site\site.css" />
@@ -152,9 +154,7 @@
     <Compile Include="Server\HomeNancyModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Client\scripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
