@@ -1,4 +1,6 @@
-﻿using Flog.Web.Bundling;
+﻿using System.Reflection;
+using Autofac;
+using Flog.Web.Bundling;
 using Microsoft.Owin.Extensions;
 using Nancy;
 using Nancy.Conventions;
@@ -10,26 +12,19 @@ namespace Flog.Web
     {
         public void Configuration(IAppBuilder app)
         {
-            BundleStartup.Setup();
+            var builder = new ContainerBuilder();
+            builder.RegisterAssemblyModules(GetType().Assembly);
+            var container = builder.Build();
 
-            app.UseNancy();
+            app.UseNancy(options =>
+            {
+                var bootstrapper = new FlogNancyBootstrapper()
+                    .UseContainer(container);
+
+                options.Bootstrapper = bootstrapper;
+            });
+
             app.UseStageMarker(PipelineStage.MapHandler);
-        }
-    }
-
-    public class Bootstrapper : DefaultNancyBootstrapper
-    {
-        // The bootstrapper enables you to reconfigure the composition of the framework,
-        // by overriding the various methods and properties.
-        // For more information https://github.com/NancyFx/Nancy/wiki/Bootstrapper
-
-        protected override void ConfigureConventions(NancyConventions conventions)
-        {
-            base.ConfigureConventions(conventions);
-
-            conventions.StaticContentsConventions.Add(
-                StaticContentConventionBuilder.AddDirectory("client", @"client")
-                );
         }
     }
 }
