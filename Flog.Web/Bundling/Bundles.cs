@@ -15,6 +15,8 @@ namespace Flog.Web.Bundling
             new BundleFile("~/client/app/autofocus.js", minify: true),
             new BundleFile("~/client/app/confirmbutton.js", minify: true),
             new BundleFile("~/client/app/showerrors.js", minify: true),
+            
+            new BundleFile("~/client/app/services/workout_service.js", minify: true),
 
             new BundleFile("~/client/app/features/home/home.js", minify: true),
             new BundleFile("~/client/app/features/home/workout_list.js", minify: true),

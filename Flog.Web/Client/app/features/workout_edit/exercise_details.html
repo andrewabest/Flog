@@ -13,10 +13,10 @@
     </div>
     <div ng-if="vm.addingSet" class="row" style="margin-bottom: 15px;">
         <div class="col-md-12 well">
-            <fg-set ng-if="vm.addingSet" sets="vm.sets" closecallback="vm.addingSet"></fg-set>
+            <fg-set ng-if="vm.addingSet" sets="vm.exercise.sets" closecallback="vm.addingSet"></fg-set>
         </div>
     </div>
-    <div class="row" style="margin-bottom: 15px;" ng-repeat="set in vm.sets">
+    <div class="row" style="margin-bottom: 15px;" ng-repeat="set in vm.exercise.sets">
         <div class="col-md-12">
             <p>{{set.weight}} x {{set.reps}} @ {{set.rpe}} RPE</p>
         </div>

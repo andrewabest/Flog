@@ -2,7 +2,7 @@
     <div class="page-header">
         <div class="row">
             <div class="col-md-12">
-                <h1>Workout {{vm.workoutId}}</h1>
+                <h1>Workout {{vm.workout.id}}</h1>
             </div>
         </div>
     </div>
@@ -10,18 +10,23 @@
         <div class="col-md-12 well">
             <button ng-if="!vm.addingExercise" ng-click="vm.addExercise()" class="btn btn-success">Add Exercise</button>
             <div class="exerciseContainer">
-                <fg-exercise ng-if="vm.addingExercise" class="exercise" exercises="vm.exercises" closecallback="vm.addingExercise"></fg-exercise>
+                <fg-exercise ng-if="vm.addingExercise" class="exercise" exercises="vm.workout.exercises" closecallback="vm.addingExercise"></fg-exercise>
             </div>
         </div>
     </div>
-    <div ng-repeat="exercise in vm.exercises">
-        <fg-exercise-details exercise="exercise" exercises="vm.exercises"></fg-exercise-details>
+    <div ng-repeat="exercise in vm.workout.exercises">
+        <fg-exercise-details exercise="exercise" exercises="vm.workout.exercises"></fg-exercise-details>
     </div>
-    <div ng-if="!vm.addingExercise && vm.exercises.length == 0" class="row">
+    <div ng-if="!vm.addingExercise && vm.workout.exercises.length == 0" class="row">
         <div class="col-md-12">
             <div class="alert alert-dismissable alert-warning">
                 No exercises have been added yet.
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 well">
+            <button ng-click="vm.complete()" class="btn btn-success">Workout Complete</button>
         </div>
     </div>
 </div>

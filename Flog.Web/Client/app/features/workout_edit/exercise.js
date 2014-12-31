@@ -3,7 +3,7 @@
     function exerciseController($scope) {
 
         var vm = this;
-        vm.exercise = {};
+        vm.exercise = { sets: [] };
         vm.save = save;
         vm.cancel = cancel;
 

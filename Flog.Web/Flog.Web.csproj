@@ -105,6 +105,7 @@
     <Content Include="Client\app\features\workout_edit\workout_edit.js" />
     <Content Include="Client\app\features\home\workout_list.html" />
     <Content Include="Client\app\features\home\workout_list.js" />
+    <Content Include="Client\app\services\workout_service.js" />
     <Content Include="Client\app\showerrors.js" />
     <Content Include="packages.config" />
     <Content Include="Client\app\app.js" />
@@ -125,6 +126,7 @@
     <Compile Include="Bundling\Bundles.cs" />
     <Compile Include="Bundling\BundleStartup.cs" />
     <Compile Include="Bundling\BundleFile.cs" />
+    <Compile Include="Server\WorkoutNancyModule.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Server\HomeNancyModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

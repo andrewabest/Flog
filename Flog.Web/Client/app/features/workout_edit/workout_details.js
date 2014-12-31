@@ -3,17 +3,22 @@
 
     var controllerId = 'workoutDetailsController';
 
-    function workoutDetailsController($scope, $routeParams) {
+    function workoutDetailsController($scope, $routeParams, workoutService) {
 
         var vm = this;
-        vm.workoutId = $routeParams.workoutId;
-        vm.exercises = [];
+        vm.workout = { id: $routeParams.workoutId, exercises: [] }
         vm.addExercise = addExercise;
         vm.addingExercise = false;
+        vm.complete = complete;
 
         function addExercise() {
 
             vm.addingExercise = true;
+        }
+
+        function complete() {
+
+            workoutService.completeWorkout(vm.workout);
         }
     }
 
@@ -28,6 +33,6 @@
                 controllerAs: 'vm'
             }
         })
-        .controller(controllerId, ['$scope', '$routeParams', workoutDetailsController]);
+        .controller(controllerId, ['$scope', '$routeParams', 'workoutService', workoutDetailsController]);
 
 })(angular);

@@ -5,7 +5,6 @@
         var vm = this;
         vm.exercises = $scope.exercises;
         vm.exercise = $scope.exercise;
-        vm.sets = [];
         vm.remove = remove;
         vm.addSet = addSet;
         vm.addingSet = false;
