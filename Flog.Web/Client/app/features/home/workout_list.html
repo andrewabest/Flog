@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div ng-repeat="workout in vm.workouts">
-                {{workout.Id}}
+                <a ng-click="vm.open(workout)">{{workout.display}}</a>
             </div>
         </div>
     </div>

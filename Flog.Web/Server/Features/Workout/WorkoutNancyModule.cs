@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,8 +13,9 @@ namespace Flog.Web.Server.Features.Workout
     {
         public WorkoutNancyModule(IDocumentStore documentStore) : base("workout")
         {
-            Post["/complete", runAsync: true] = (args, ct) => CompleteWorkout(documentStore);
-            Get["/all", runAsync: true] = (args, ct) => GetAllWorkouts(documentStore);
+            Post["complete", runAsync: true] = (args, ct) => CompleteWorkout(documentStore);
+            Get["all", runAsync: true] = (args, ct) => GetAllWorkouts(documentStore);
+            Get["{workoutId}", runAsync: true] = (args, ct) => GetWorkout((string)args.workoutId, documentStore);
         }
 
         private async Task<dynamic> CompleteWorkout(IDocumentStore documentStore)
@@ -29,9 +31,18 @@ namespace Flog.Web.Server.Features.Workout
         {
             var workouts = documentStore.GetAll<Workout>().ToArray();
 
-            Thread.Sleep(3000); // LATENCY MONKEY 
+            Thread.Sleep(1000); // LATENCY MONKEY 
 
             return Response.AsJson(workouts);
+        }
+        
+        private async Task<dynamic> GetWorkout(string workoutId, IDocumentStore documentStore)
+        {
+            var workout = documentStore.Get<Workout>(Guid.Parse(workoutId));
+
+            Thread.Sleep(1000); // LATENCY MONKEY 
+
+            return Response.AsJson(workout);
         }
     }
 }

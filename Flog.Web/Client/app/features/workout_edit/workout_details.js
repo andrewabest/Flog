@@ -1,4 +1,4 @@
-﻿(function(angular) {
+﻿(function(angular, moment) {
     'use strict';
 
     var controllerId = 'workoutDetailsController';
@@ -6,11 +6,27 @@
     function workoutDetailsController($scope, $routeParams, $location, workoutService) {
 
         var vm = this;
-        vm.workout = { id: $routeParams.workoutId, exercises: [] }
+        var date = moment();
+        vm.workout = { id: $routeParams.workoutId, date: date, display: date.format("dddd, MMMM Do YYYY, h:mm a"), exercises: [] }
         vm.addExercise = addExercise;
         vm.addingExercise = false;
         vm.complete = complete;
         vm.processing = false;
+        vm.isbusy = false;
+
+        activate();
+
+        function activate() {
+
+            if (!$routeParams.workoutId) return;
+
+            vm.isbusy = true;
+
+            workoutService.getWorkout($routeParams.workoutId).then(function (data) {
+                vm.workout = data;
+                vm.isbusy = false;
+            });
+        }
 
         function addExercise() {
 
@@ -53,4 +69,4 @@
         })
         .controller(controllerId, ['$scope', '$routeParams', '$location', 'workoutService', workoutDetailsController]);
 
-})(angular);
+})(angular, moment);

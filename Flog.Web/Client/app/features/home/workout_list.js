@@ -1,17 +1,5 @@
-﻿(function(angular) {
+﻿(function(angular, moment, _) {
     'use strict';
-
-    
-    // Shamelessley taken from http://stackoverflow.com/a/8809472/899705
-    function getWorkoutId() {
-        var d = new Date().getTime();
-        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = (d + Math.random() * 16) % 16 | 0;
-            d = Math.floor(d / 16);
-            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-        });
-        return uuid;
-    };
 
     function workoutListController($scope, $location, workoutService) {
 
@@ -19,6 +7,7 @@
         vm.begin = begin;
         vm.isbusy = false;
         vm.workouts = [];
+        vm.open = open;
 
         activate();
 
@@ -27,14 +16,22 @@
             vm.isbusy = true;
 
             workoutService.getWorkouts().then(function (data) {
-                vm.workouts = data;
+
+                vm.workouts = _.map(data, function (x) {
+                    x.display = moment(x.date).format("dddd, MMMM Do YYYY, h:mm a");
+                    return x;
+                });
+
                 vm.isbusy = false;
             });
         }
 
         function begin() {
-            var workoutId = getWorkoutId();
-            $location.path('/workouts/' + workoutId.toString());
+            $location.path('/workouts/new');
+        }
+
+        function open(workout) {
+            $location.path('/workouts/' + workout.id.toString());
         }
     }
 
@@ -53,4 +50,4 @@
         })
         .controller(controllerId, ['$scope', '$location', 'workoutService', workoutListController]);
 
-})(angular);
+})(angular, moment, _);

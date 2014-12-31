@@ -21,6 +21,10 @@
                 templateUrl: 'client/app/features/home/home.html',
                 controller: 'homeController'
             })
+            .when('/workouts/new', {
+                templateUrl: 'client/app/features/workout_edit/workout_edit.html',
+                controller: 'workoutEditController'
+            })
             .when('/workouts/:workoutId', {
                 templateUrl: 'client/app/features/workout_edit/workout_edit.html',
                 controller: 'workoutEditController'

@@ -2,7 +2,7 @@
     <div class="page-header">
         <div class="row">
             <div class="col-md-12">
-                <h1>Workout {{vm.workout.id}}</h1>
+                <h1>Workout {{vm.workout.display}}</h1>
             </div>
         </div>
     </div>
@@ -14,25 +14,28 @@
             </div>
         </div>
     </div>
+    <div class="row" style="margin-bottom: 15px;">
+        <div class="col-md-12">
+            <div class="bs-component" ng-if="vm.isbusy">
+                <div class="progress progress-striped active">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div ng-repeat="exercise in vm.workout.exercises">
         <fg-exercise-details exercise="exercise" exercises="vm.workout.exercises"></fg-exercise-details>
     </div>
-    <div ng-if="!vm.addingExercise && vm.workout.exercises.length == 0" class="row">
+    <div ng-if="!vm.isbusy && !vm.addingExercise && vm.workout.exercises.length == 0" class="row">
         <div class="col-md-12">
             <div class="alert alert-dismissable alert-warning">
                 No exercises have been added yet.
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 well">
-            <button ng-click="vm.complete()" class="btn btn-success" ng-disabled="vm.processing" style="float: left; margin-right: 15px;">Workout Complete</button>
-            <div class="bs-component" style="margin-top: 15px;">
-                <div class="progress progress-striped active" ng-if="vm.processing">
-                    <div class="progress-bar" style="width: 100%"></div>
-                </div>
-            </div>
+    <div class="row" ng-if="!vm.isbusy && vm.workout.exercises.length > 0">
+        <div class=" col-md-12 well">
+            <button ng-click="vm.complete()" class="btn btn-success" ng-disabled="vm.processing">Workout Complete</button>
         </div>
-        <div class="clearfix"></div>
     </div>
 </div>

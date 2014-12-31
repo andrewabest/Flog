@@ -138,6 +138,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutofacModules\JsonSerializationAutofacModule.cs" />
     <Compile Include="AutofacModules\StorageModule.cs" />
     <Compile Include="Bundling\Bundles.cs" />
     <Compile Include="Bundling\BundleStartup.cs" />
