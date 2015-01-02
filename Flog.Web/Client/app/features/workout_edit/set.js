@@ -1,5 +1,26 @@
 ﻿(function(angular) {
 
+    'use strict';
+
+    var controllerId = 'setController';
+
+    angular.module('set', [])
+        .directive('fgSet', function () {
+            return {
+                restrict: 'E',
+                scope: {
+                    sets: '=',
+                    closecallback: '='
+                },
+                replace: true,
+                templateUrl: 'client/app/features/workout_edit/set.html',
+                controller: controllerId,
+                controllerAs: 'vm'
+            }
+
+        })
+        .controller(controllerId, ['$scope', setController]);
+
     function setController($scope) {
 
         var vm = this;
@@ -20,24 +41,5 @@
             $scope.closecallback = false;
         }
     }
-
-    var controllerId = 'setController';
-
-    angular.module('set', [])
-        .directive('fgSet', function() {
-            return {
-                restrict: 'E',
-                scope: {
-                    sets: '=',
-                    closecallback: '='
-                },
-                replace: true,
-                templateUrl: 'client/app/features/workout_edit/set.html',
-                controller: controllerId,
-                controllerAs: 'vm'
-            }
-
-        })
-        .controller(controllerId, ['$scope', setController]);
 
 })(angular);

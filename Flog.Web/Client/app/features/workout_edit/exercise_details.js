@@ -1,5 +1,25 @@
 ﻿(function(angular) {
 
+    'use strict';
+
+    var controllerId = 'exerciseDetailsController';
+
+    angular.module('exerciseDetails', [])
+        .directive('fgExerciseDetails', function () {
+            return {
+                restrict: 'E',
+                scope: {
+                    exercise: '=',
+                    exercises: '='
+                },
+                replace: true,
+                templateUrl: 'client/app/features/workout_edit/exercise_details.html',
+                controller: controllerId,
+                controllerAs: 'vm'
+            }
+        })
+        .controller(controllerId, ['$scope', exerciseDetailsController]);
+
     function exerciseDetailsController($scope) {
         
         var vm = this;
@@ -19,23 +39,5 @@
             vm.addingSet = true;
         }
     }
-
-    var controllerId = 'exerciseDetailsController';
-
-    angular.module('exerciseDetails', [])
-        .directive('fgExerciseDetails', function() {
-            return {
-                restrict: 'E',
-                scope: {
-                    exercise: '=',
-                    exercises: '='
-                },
-                replace: true,
-                templateUrl: 'client/app/features/workout_edit/exercise_details.html',
-                controller: controllerId,
-                controllerAs: 'vm'
-            }
-        })
-        .controller(controllerId, ['$scope', exerciseDetailsController]);
 
 })(angular);

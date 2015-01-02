@@ -25,7 +25,7 @@ namespace Flog.Web.Server
             var css = Bundle.Css().RenderCachedAssetTag("css");
             var bootstrappingScripts = Bundle.JavaScript().RenderCachedAssetTag("app-bootstrappingjs");
             var appScripts = Bundle.JavaScript().RenderCachedAssetTag("app-js");
-#endif
+            #endif
 
             return View[@"client/index.html", new
             {

@@ -1,7 +1,21 @@
-﻿(function(angular, moment) {
+﻿(function (angular, moment) {
+
     'use strict';
 
     var controllerId = 'workoutDetailsController';
+
+    angular.module('workoutEdit', ['ngAnimate'])
+        .directive('fgWorkoutDetails', function () {
+            return {
+                restrict: 'E',
+                scope: {},
+                replace: true,
+                templateUrl: 'client/app/features/workout_edit/workout_details.html',
+                controller: controllerId,
+                controllerAs: 'vm'
+            }
+        })
+        .controller(controllerId, ['$scope', '$routeParams', '$location', 'workoutService', workoutDetailsController]);
 
     function workoutDetailsController($scope, $routeParams, $location, workoutService) {
 
@@ -55,18 +69,5 @@
             $scope.$apply();
         }
     }
-
-    angular.module('workoutEdit', ['ngAnimate'])
-        .directive('fgWorkoutDetails', function() {
-            return {
-                restrict: 'E',
-                scope: {},
-                replace: true,
-                templateUrl: 'client/app/features/workout_edit/workout_details.html',
-                controller: controllerId,
-                controllerAs: 'vm'
-            }
-        })
-        .controller(controllerId, ['$scope', '$routeParams', '$location', 'workoutService', workoutDetailsController]);
 
 })(angular, moment);

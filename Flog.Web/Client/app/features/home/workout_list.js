@@ -1,5 +1,21 @@
 ﻿(function(angular, moment, _) {
+
     'use strict';
+
+    var controllerId = 'workoutListController';
+
+    angular.module('home', [])
+        .directive('fgWorkoutList', function () {
+            return {
+                restrict: 'E',
+                scope: {},
+                templateUrl: 'client/app/features/home/workout_list.html',
+                replace: true,
+                controller: controllerId,
+                controllerAs: 'vm'
+            };
+        })
+        .controller(controllerId, ['$scope', '$location', 'workoutService', workoutListController]);
 
     function workoutListController($scope, $location, workoutService) {
 
@@ -34,20 +50,5 @@
             $location.path('/workouts/' + workout.id.toString());
         }
     }
-
-    var controllerId = 'workoutListController';
-
-    angular.module('home', [])
-        .directive('fgWorkoutList', function() {
-            return {
-                restrict: 'E',
-                scope: {},
-                templateUrl: 'client/app/features/home/workout_list.html',
-                replace: true,
-                controller: controllerId,
-                controllerAs: 'vm'
-            };
-        })
-        .controller(controllerId, ['$scope', '$location', 'workoutService', workoutListController]);
 
 })(angular, moment, _);

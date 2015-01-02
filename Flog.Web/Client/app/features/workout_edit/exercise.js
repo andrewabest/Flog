@@ -1,5 +1,25 @@
 ﻿(function(angular) {
 
+    'use strict';
+
+    var controllerId = 'exerciseController';
+
+    angular.module('exercise', ['ui.bootstrap.showErrors'])
+        .directive('fgExercise', function () {
+            return {
+                restrict: 'E',
+                scope: {
+                    exercises: "=",
+                    closecallback: "="
+                },
+                replace: true,
+                templateUrl: 'client/app/features/workout_edit/exercise.html',
+                controller: controllerId,
+                controllerAs: 'vm'
+            }
+        })
+        .controller(controllerId, ['$scope', exerciseController]);
+
     function exerciseController($scope) {
 
         var vm = this;
@@ -20,23 +40,5 @@
             $scope.closecallback = false;
         }
     }
-
-    var controllerId = 'exerciseController';
-
-    angular.module('exercise', ['ui.bootstrap.showErrors'])
-        .directive('fgExercise', function() {
-            return {
-                restrict: 'E',
-                scope: {
-                    exercises: "=",
-                    closecallback: "="
-                },
-                replace: true,
-                templateUrl: 'client/app/features/workout_edit/exercise.html',
-                controller: controllerId,
-                controllerAs: 'vm'
-            }
-        })
-        .controller(controllerId, ['$scope', exerciseController]);
 
 })(angular);

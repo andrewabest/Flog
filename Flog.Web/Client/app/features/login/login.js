@@ -1,5 +1,7 @@
 ﻿(function (angular) {
 
+    'use strict';
+
     angular.module('app')
         .controller('loginController', ['$location', '$routeParams', 'userService', loginController]);
 
