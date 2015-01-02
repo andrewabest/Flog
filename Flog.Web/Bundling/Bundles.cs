@@ -26,6 +26,9 @@ namespace Flog.Web.Bundling
             new BundleFile("~/client/scripts/sweet-alert.min.js"),
             
             new BundleFile("~/client/app/services/workout_service.js", minify: true),
+            new BundleFile("~/client/app/services/user_service.js", minify: true),
+
+            new BundleFile("~/client/app/features/login/login.js", minify: true),
 
             new BundleFile("~/client/app/features/home/home.js", minify: true),
             new BundleFile("~/client/app/features/home/workout_list.js", minify: true),

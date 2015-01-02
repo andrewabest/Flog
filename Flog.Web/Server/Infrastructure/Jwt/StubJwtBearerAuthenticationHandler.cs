@@ -10,6 +10,10 @@ namespace Flog.Web.Server.Infrastructure.Jwt
 {
     public class StubJwtBearerAuthenticationHandler : AuthenticationHandler<StubJwtBearerAuthenticationOptions>
     {
+        const string NameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
+        const string RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
+        const string StringClaimValueType = "http://www.w3.org/2001/XMLSchema#string";
+
         protected override async Task<AuthenticationTicket> AuthenticateCoreAsync()
         {
             string token;
@@ -34,10 +38,10 @@ namespace Flog.Web.Server.Infrastructure.Jwt
         private ClaimsIdentity GetStubIdentity()
         {
             return new  ClaimsIdentity(
-                new [] { new Claim("username", "John Smith"), new Claim("role", "User") }, 
-                Options.AuthenticationType, 
-                nameType: "username", 
-                roleType: "role");
+                new[] { new Claim(NameClaimType, "John Smith"), new Claim(RoleClaimType, "User") }, 
+                Options.AuthenticationType,
+                nameType: NameClaimType,
+                roleType: RoleClaimType);
         }
 
         private static bool TryRetrieveToken(IOwinRequest request, out string token)
@@ -53,13 +57,6 @@ namespace Flog.Web.Server.Infrastructure.Jwt
                 token = bearerToken.StartsWith(bearerPrefix) ? bearerToken.Substring(bearerPrefix.Length) : bearerToken;
                 return true;
             }
-
-            // TODO: Wat do with this?
-            //if (request.Query.Count(q => q.Key == "id_token") == 1)
-            //{
-            //    token = request.Query.Single(q => q.Key == "id_token").Value.First();
-            //    return true;
-            //}
 
             // Fail if no Authorization header or more than one Authorization headers  
             // are found in the HTTP request  

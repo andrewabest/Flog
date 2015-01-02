@@ -18,6 +18,7 @@
                 .success(function (data, status, headers, config) {
 
                     $http.defaults.headers.common['Authorization'] = 'Bearer myJwtToken';
+                    context.isAuthenticated = data.authenticated;
                     context.userName = data.userName;
 
                     deferred.resolve(data);

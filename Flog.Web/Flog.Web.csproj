@@ -108,7 +108,8 @@
   <ItemGroup>
     <Content Include="Client\app\autofocus.js" />
     <Content Include="Client\app\confirmbutton.js" />
-    <Content Include="Client\app\features\login.js" />
+    <Content Include="Client\app\features\login\login.html" />
+    <Content Include="Client\app\features\login\login.js" />
     <Content Include="Client\app\features\workout_edit\exercise.html" />
     <Content Include="Client\app\features\workout_edit\exercise.js" />
     <Content Include="Client\app\features\workout_edit\exercise_details.html" />
@@ -166,6 +167,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Server\HomeNancyModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserIdentity.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

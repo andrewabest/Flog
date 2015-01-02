@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using Autofac;
 using Flog.Web.Bundling;
@@ -7,6 +8,7 @@ using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Autofac;
 using Nancy.Conventions;
 using Nancy.ErrorHandling;
+using Nancy.Owin;
 using Nancy.Responses;
 using Nancy.Serialization.JsonNet;
 
@@ -15,6 +17,7 @@ namespace Flog.Web
     public class FlogNancyBootstrapper : AutofacNancyBootstrapper
     {
         IContainer _container;
+        Func<NancyContext, ClaimsPrincipal> _claimsPrincipalResolver;
 
         public FlogNancyBootstrapper()
         {
@@ -38,6 +41,39 @@ namespace Flog.Web
         protected override void ApplicationStartup(ILifetimeScope container, IPipelines pipelines)
         {
             BundleStartup.Setup();
+
+            // Ensure that before each request is processed we scrape any identity stuffed into the environment dictionary out and stuff it into the Context CurrentUser
+            // ಠ_ಠ
+            pipelines.BeforeRequest +=
+                ctx =>
+                {
+                    
+                    var principal = ResolveClaimsPrincipal(ctx);
+                    if (principal != null && principal.Identity.IsAuthenticated)
+                    {
+                        var claimsIdentity = (ClaimsIdentity)principal.Identity;
+                        ctx.CurrentUser = new UserIdentity(claimsIdentity);
+                    }
+
+                    // Otherwise continue with processing this request
+                    return null;
+                };
+        }
+
+        private ClaimsPrincipal ResolveClaimsPrincipal(NancyContext ctx)
+        {
+            object owinEnvironmentObject;
+            if (ctx.Items.TryGetValue(NancyMiddleware.RequestEnvironmentKey, out owinEnvironmentObject))
+            {
+                var owinEnvironment = (IDictionary<string, object>)owinEnvironmentObject;
+                object userObject;
+                if (owinEnvironment != null && owinEnvironment.TryGetValue("server.User", out userObject))
+                {
+                    return (ClaimsPrincipal)userObject;
+                }
+            }
+
+            return null;
         }
 
         protected override void ConfigureConventions(NancyConventions conventions)
