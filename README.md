@@ -3,7 +3,7 @@ Flog
 ## Done Stuff ##
 * Basic routing
 * Formy-stuff - data validation, submission etc
-* Modularization via angular directives
+* Modularization and scope isolation via favouring angular directives over controllers for the most part
 * Inter-directive communication via directive scope
 * Demonstration of encapsulated data services via angular factories
 * Usage of $q to return promises from data services and make them nice to work with
