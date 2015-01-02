@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Flog.Web.Server.Infrastructure;
 using Nancy;
 using Nancy.ModelBinding;
+using Nancy.Security;
 
 namespace Flog.Web.Server.Features.Workout
 {
@@ -13,6 +14,8 @@ namespace Flog.Web.Server.Features.Workout
     {
         public WorkoutNancyModule(IDocumentStore documentStore) : base("workout")
         {
+            this.RequiresAuthentication();
+
             Post["complete", runAsync: true] = (args, ct) => CompleteWorkout(documentStore);
             Get["all", runAsync: true] = (args, ct) => GetAllWorkouts(documentStore);
             Get["{workoutId}", runAsync: true] = (args, ct) => GetWorkout((string)args.workoutId, documentStore);

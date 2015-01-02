@@ -57,6 +57,9 @@
     <Reference Include="Microsoft.Owin.Host.SystemWeb">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
     <Reference Include="Nancy">
       <HintPath>..\packages\Nancy.0.23.2\lib\net40\Nancy.dll</HintPath>
     </Reference>
@@ -105,6 +108,7 @@
   <ItemGroup>
     <Content Include="Client\app\autofocus.js" />
     <Content Include="Client\app\confirmbutton.js" />
+    <Content Include="Client\app\features\login.js" />
     <Content Include="Client\app\features\workout_edit\exercise.html" />
     <Content Include="Client\app\features\workout_edit\exercise.js" />
     <Content Include="Client\app\features\workout_edit\exercise_details.html" />
@@ -118,9 +122,13 @@
     <Content Include="Client\app\features\workout_edit\workout_edit.js" />
     <Content Include="Client\app\features\home\workout_list.html" />
     <Content Include="Client\app\features\home\workout_list.js" />
+    <Content Include="Client\app\services\user_service.js" />
     <Content Include="Client\app\services\workout_service.js" />
     <Content Include="Client\app\showerrors.js" />
+    <Content Include="Client\content\img\flog-logo.png" />
+    <Content Include="Client\content\please-wait.css" />
     <Content Include="Client\content\sweet-alert.css" />
+    <Content Include="Client\scripts\please-wait.min.js" />
     <Content Include="Client\scripts\sweet-alert.min.js" />
     <Content Include="packages.config" />
     <Content Include="Client\app\app.js" />
@@ -144,6 +152,7 @@
     <Compile Include="Bundling\BundleStartup.cs" />
     <Compile Include="Bundling\BundleFile.cs" />
     <Compile Include="NancyBootstrapper.cs" />
+    <Compile Include="Server\Features\UserNancyModule.cs" />
     <Compile Include="Server\Features\Workout\Exercise.cs" />
     <Compile Include="Server\Features\Workout\Set.cs" />
     <Compile Include="Server\Features\Workout\Workout.cs" />
@@ -151,6 +160,9 @@
     <Compile Include="Server\Infrastructure\FileSystemDocumentStore.cs" />
     <Compile Include="Server\Infrastructure\IDocumentStore.cs" />
     <Compile Include="Server\Infrastructure\IIdentifiable.cs" />
+    <Compile Include="Server\Infrastructure\Jwt\StubJwtBearerAuthenticationHandler.cs" />
+    <Compile Include="Server\Infrastructure\Jwt\StubJwtBearerAuthenticationMiddleware.cs" />
+    <Compile Include="Server\Infrastructure\Jwt\StubJwtBearerAuthenticationOptions.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Server\HomeNancyModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

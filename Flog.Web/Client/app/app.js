@@ -34,7 +34,7 @@
             });
     }
 
-
+    window.loading_screen.finish();
 
     //var app = angular.module('app', ['workoutList']);
     // app.run();

@@ -1,9 +1,6 @@
-﻿using System.Reflection;
-using Autofac;
-using Flog.Web.Bundling;
+﻿using Autofac;
+using Flog.Web.Server.Infrastructure.Jwt;
 using Microsoft.Owin.Extensions;
-using Nancy;
-using Nancy.Conventions;
 using Owin;
 
 namespace Flog.Web
@@ -16,6 +13,8 @@ namespace Flog.Web
             builder.RegisterAssemblyModules(GetType().Assembly);
             var container = builder.Build();
 
+            app.Use(typeof(StubJwtBearerAuthenticationMiddleware), app, new StubJwtBearerAuthenticationOptions("jwt"));
+            app.UseStageMarker(PipelineStage.Authenticate);
             app.UseNancy(options =>
             {
                 var bootstrapper = new FlogNancyBootstrapper()
@@ -23,7 +22,6 @@ namespace Flog.Web
 
                 options.Bootstrapper = bootstrapper;
             });
-
             app.UseStageMarker(PipelineStage.MapHandler);
         }
     }

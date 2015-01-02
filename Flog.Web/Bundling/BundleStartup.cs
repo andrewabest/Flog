@@ -59,11 +59,13 @@ namespace Flog.Web.Bundling
 
             #if DEBUG
             BuildCssBundle(Bundles.Css).ForceDebug().AsNamed("css-debug", "");
+            BuildJavaScriptBundle(Bundles.BootstrappingScripts).ForceDebug().AsNamed("app-bootstrappingjs-debug", "");
             BuildJavaScriptBundle(Bundles.AppScripts).ForceDebug().AsNamed("app-js-debug", "");
             #else
             BuildCssBundle(Bundles.Css).ForceRelease().AsCached("css", "~/assets/css/#/css");
+            BuildJavaScriptBundle(Bundles.BootstrappingScripts).ForceRelease().AsCached("app-bootstrappingjs", "~/assets/js/#/app-bootstrappingjs");
             BuildJavaScriptBundle(Bundles.AppScripts).ForceRelease().AsCached("app-js", "~/assets/js/#/app-js");
-            #endif
+#endif
         }
     }
 }

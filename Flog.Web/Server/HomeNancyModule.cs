@@ -19,14 +19,17 @@ namespace Flog.Web.Server
         {
             #if DEBUG
             var css = Bundle.Css().RenderNamed("css-debug");
+            var bootstrappingScripts = Bundle.JavaScript().RenderNamed("app-bootstrappingjs-debug");
             var appScripts = Bundle.JavaScript().RenderNamed("app-js-debug");
             #else
             var css = Bundle.Css().RenderCachedAssetTag("css");
+            var bootstrappingScripts = Bundle.JavaScript().RenderCachedAssetTag("app-bootstrappingjs");
             var appScripts = Bundle.JavaScript().RenderCachedAssetTag("app-js");
-            #endif
+#endif
 
             return View[@"client/index.html", new
             {
+                BootstrappingScripts = bootstrappingScripts,
                 Scripts = appScripts,
                 Css = css
             }]

@@ -8,6 +8,12 @@ namespace Flog.Web.Bundling
         {
             new BundleFile("~/client/content/site/site.css", minify: true),
             new BundleFile("~/client/content/sweet-alert.css", minify: true),
+            new BundleFile("~/client/content/please-wait.css", minify: true)
+        };
+
+        public static readonly List<BundleFile> BootstrappingScripts = new List<BundleFile>
+        {
+            new BundleFile("~/client/scripts/please-wait.min.js"),
         };
 
         public static readonly List<BundleFile> AppScripts = new List<BundleFile>
