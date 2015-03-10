@@ -45,17 +45,17 @@ namespace Flog.Web.Server
             #if DEBUG
             var css = Bundle.Css().RenderNamed("css-debug");
             var bootstrappingScripts = Bundle.JavaScript().RenderNamed("app-bootstrappingjs-debug");
-            var appScripts = Bundle.JavaScript().RenderNamed("app-reactjs-debug");
+            //var appScripts = Bundle.JavaScript().RenderNamed("app-reactjs-debug");
             #else
             var css = Bundle.Css().RenderCachedAssetTag("css");
             var bootstrappingScripts = Bundle.JavaScript().RenderCachedAssetTag("app-bootstrappingjs");
-            var appScripts = Bundle.JavaScript().RenderCachedAssetTag("app-reactjs");
+            //var appScripts = Bundle.JavaScript().RenderCachedAssetTag("app-reactjs");
             #endif
 
             return View[@"client/react-index.html", new
             {
                 BootstrappingScripts = bootstrappingScripts,
-                Scripts = appScripts,
+                //Scripts = appScripts,
                 Css = css
             }]
             .WithHeader("Content-Type", "text/html; charset=utf-8")

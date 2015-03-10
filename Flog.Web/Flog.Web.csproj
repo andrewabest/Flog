@@ -129,6 +129,7 @@
     <Content Include="Client\content\img\flog-logo.png" />
     <Content Include="Client\content\please-wait.css" />
     <Content Include="Client\content\sweet-alert.css" />
+    <Content Include="Client\react-app\app.js" />
     <Content Include="Client\react-index.html" />
     <Content Include="Client\scripts\please-wait.min.js" />
     <Content Include="Client\scripts\sweet-alert.min.js" />
@@ -170,9 +171,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserIdentity.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Client\react-app\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
