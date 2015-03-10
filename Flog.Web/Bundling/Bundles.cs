@@ -39,5 +39,10 @@ namespace Flog.Web.Bundling
             new BundleFile("~/client/app/features/workout_edit/exercise_details.js", minify: true),
             new BundleFile("~/client/app/features/workout_edit/set.js", minify: true),
         };
+
+        public static readonly List<BundleFile> ReactAppScripts = new List<BundleFile>
+        {
+
+        };
     }
 }
