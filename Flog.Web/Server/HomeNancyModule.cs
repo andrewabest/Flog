@@ -10,6 +10,7 @@ namespace Flog.Web.Server
         {
             Get["/"] = _ => RenderView();
             Get["/React"] = _ => RenderReactView();
+            Get["/React/{anything*}"] = _ => RenderReactView();
             Get["/Error"] = _ => { throw new Exception("Hello world!"); };
             Get["/NotFound"] = _ => new NotFoundResponse();
             Get["/Unauthorized"] = _ => new Response().WithStatusCode(HttpStatusCode.Unauthorized);
