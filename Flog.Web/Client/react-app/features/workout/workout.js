@@ -1,12 +1,13 @@
 (function() {
 	'use strict';
 	
-	var Workout = React.createClass({
+	flog.Workout = React.createClass({
 
 		getInitialState: function() {
 		    return {
 		    	addingExercise: false,
 		    	isBusy: false,
+		    	isCompleting: false,
 		    	exercises: []
 		    };
 		},
@@ -29,8 +30,8 @@
 			// Invoked when a component is receiving new props. This method is not called for the initial render.
 			// Use this as an opportunity to react to a prop transition before render() is called by updating the state using this.setState(). The old props can be accessed via this.props. Calling this.setState() within this function will not trigger an additional render.
 			setState({
-				showNoExercisesWarning: this.state.isBusy && !this.state.addingExercise && nextProps.workout.exercises.length == 0,
-		    	showCompleteAction: this.state.isBusy && nextProps.workout.exercises.length > 0
+				showNoExercisesWarning: !this.state.isBusy && !this.state.addingExercise && nextProps.workout.exercises.length == 0,
+		    	showCompleteAction: !this.state.isBusy && nextProps.workout.exercises.length > 0
 			});
 		},
 
@@ -63,6 +64,10 @@
 			this.setState({
 				addingExercise: false
 			});
+		},
+
+		complete: function() {
+
 		},
 
 		render: function () {
@@ -133,7 +138,7 @@
 			    		this.state.showCompleteAction ?
 			    		<div className="row">
 					        <div className=" col-md-12 well">
-					            <button ng-click="vm.complete()" className="btn btn-success" ng-disabled="vm.processing">Workout Complete</button>
+					            <button onClick={this.complete()} disabled={this.state.isCompleting} className="btn btn-success">Workout Complete</button>
 					        </div>
 					    </div>
 					    : null
@@ -144,4 +149,4 @@
 		}
 	});
 
-})();
+})(window.flog = window.flog || {});

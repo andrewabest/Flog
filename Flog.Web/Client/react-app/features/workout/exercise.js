@@ -1,7 +1,7 @@
-(function() {
+(function(flog) {
 	'use strict';
 	
-	var Exercise = React.createClass({
+	flog.Exercise = React.createClass({
 
 		propTypes: {
 			addExerciseCallback: React.PropTypes.func.isRequired,
@@ -57,4 +57,4 @@
 		}
 	});
 
-})();
+})(window.flog = window.flog || {});

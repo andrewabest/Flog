@@ -1,7 +1,7 @@
-(function() {
+(function(flog) {
 	'use strict';
 	
-	var ExerciseDetails = React.createClass({
+	flog.ExerciseDetails = React.createClass({
 
 		getInitialState: function() {
 			return { 
@@ -89,4 +89,4 @@
 		}
 	});
 
-})();
+})(window.flog = window.flog || {});

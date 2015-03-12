@@ -1,7 +1,7 @@
-(function() {
+(function(flog) {
 	'use strict';
 	
-	var Set = React.createClass({
+	flog.Set = React.createClass({
 
 		propTypes: {
 			addSetCallback: React.PropTypes.func.isRequired,
@@ -56,4 +56,4 @@
 		}
 	});
 
-})();
+})(window.flog = window.flog || {});

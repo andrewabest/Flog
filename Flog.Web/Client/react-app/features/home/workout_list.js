@@ -1,7 +1,7 @@
-(function() {
+(function(flog) {
 	'use strict';
 	
-	var WorkoutList = React.createClass({
+	flog.WorkoutList = React.createClass({
 
 		propTypes: {
 			workouts: React.PropTypes.array,
@@ -13,7 +13,7 @@
 		    };
 	  	},
 
-	  	mixins: [Navigation],
+	  	mixins: [ReactRouter.Navigation],
 
 		beginWorkout: function() {
 			this.transitionTo('newWorkout');
@@ -45,7 +45,7 @@
 				        <div className="col-md-12 well">
 				        	<ul>
 					        {this.props.workouts.map(function(workout, i) {
-					            return <WorkoutListItem workout={workout} />;
+					            return <flog.WorkoutListItem workout={workout} />;
 					        })}
 					        </ul>
 				        </div>
@@ -55,5 +55,5 @@
 		}
 	});
 
-})();
+})(window.flog = window.flog || {});
 	

@@ -1,15 +1,18 @@
-(function() {
+(function(flog) {
 	'use strict';
 	
-	var WorkoutListItem = React.createClass({
+	flog.WorkoutListItem = React.createClass({
 
 		propTypes: {
 			workout: React.PropTypes.object.isRequired,
 		},
 
 		render: function () {
+			
+			var Link = ReactRouter.Link;
+
 			return <li><Link to="editWorkout" params={{id: this.props.workout.id}}>{this.props.workout.display}</Link></li>;
 		}
 	});
 
-})();
+})(window.flog = window.flog || {});
