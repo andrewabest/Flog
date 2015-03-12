@@ -36,7 +36,7 @@
 		},
 
 		componentDidMount: function() {
-			Console.Log(this.props.exercise.name);
+			console.log(this.props.exercise.name);
 		},
 
 		render: function() {
@@ -73,7 +73,7 @@
 			    		this.state.addingSet ?
 			    		<div className="row" style={rowStyle}>
 					        <div className="col-md-12 well">
-					            <Set addSetCallback={this.addSetCompleted} closeCallback={this.addSetCancelled} />
+					            <flog.Set addSetCallback={this.addSetCompleted} closeCallback={this.addSetCancelled} />
 					        </div>
 					    </div>
 					    : null

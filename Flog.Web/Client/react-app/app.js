@@ -10,6 +10,7 @@
 	var RouteHandler = Router.RouteHandler;
 
 	var App = React.createClass({
+
 	    render: function(){
 	        return (
 	        	<RouteHandler />
@@ -19,6 +20,7 @@
 
 	var routes = (
 		<Route path="/" handler={App}>
+			<Route name="login" handler={flog.Login}/>
 			<Route name="workoutList" path="react" handler={flog.WorkoutList} />
 			<Route name="newWorkout" path="react/new" handler={flog.Workout} />
 			<Route name="editWorkout" path="react/:id" handler={flog.Workout} />

@@ -13,7 +13,7 @@
 		    };
 	  	},
 
-	  	mixins: [ReactRouter.Navigation],
+	  	mixins: [ReactRouter.Navigation, flog.mixins.Authentication],
 
 		beginWorkout: function() {
 			this.transitionTo('newWorkout');
