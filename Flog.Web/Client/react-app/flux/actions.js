@@ -4,6 +4,12 @@
   flog.flux = flog.flux || {};
 
   flog.flux.actionIdentifiers = {
+    WORKOUTS: {
+      LOAD: "WORKOUTS:LOAD",
+      LOAD_SUCCESS: "WORKOUTS:LOAD_SUCCESS",
+      LOAD_FAIL: "WORKOUTS:LOAD_FAIL"
+    },
+
     WORKOUT: {
       ADD: "WORKOUT:ADD",
       EDIT: "WORKOUT:EDIT",
@@ -18,6 +24,27 @@
   };
 
   flog.flux.actions = {
+    workouts: {
+      load: function() {
+        this.dispatch(flog.flux.actionIdentifiers.WORKOUTS.LOAD);
+
+        var self = this;
+        flog.services.workout.getWorkouts()
+          .done(function (data) {
+
+            var workouts = _.map(data, function (x) {
+                x.display = moment(x.date).format("dddd, MMMM Do YYYY, h:mm a");
+                return x;
+            });
+
+            self.dispatch(flog.flux.actionIdentifiers.WORKOUTS.LOAD_SUCCESS, {workouts: workouts})
+          })
+          .fail(function (error) {
+            self.dispatch(flog.flux.actionIdentifiers.WORKOUTS.LOAD_FAIL, {error: error});
+          });
+      }
+    },
+
     workout: {
 
       add: function(id) {

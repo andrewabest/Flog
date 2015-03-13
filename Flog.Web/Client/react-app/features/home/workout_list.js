@@ -3,10 +3,6 @@
 	
 	flog.WorkoutList = React.createClass({
 
-		propTypes: {
-			workouts: React.PropTypes.array
-		},
-
 		mixins: [
 	  		ReactRouter.Navigation, 
 	  		flog.mixins.Authentication,
@@ -16,10 +12,17 @@
 
 		getStateFromFlux: function() {
 
+			var store = this.getFlux().store("workout");
+
 			return {
-			  workouts: this.getFlux().store("workout").getWorkouts()
+			  loading: store.loading,
+			  workouts: store.getWorkouts()
 			};
 		},
+
+		componentDidMount: function() {
+	    	this.getFlux().actions.workouts.load();
+	  	},
 
 		beginWorkout: function() {
 			var workoutId = this.getWorkoutId();
@@ -47,6 +50,10 @@
 		    	marginBottom: 15
 		    };
 
+		    var fullWidthStyle = {
+		    	width: '100%'
+		    };
+
 	        return (
 	        	<div>
 	        		<div className="row">
@@ -61,6 +68,15 @@
 				    </div>
 				    <div className="row" style={workoutRowStyle}>
 				        <div className="col-md-12 well">
+				        	{
+			        			this.state.loading ?
+			        			<div className="bs-component">
+					                <div className="progress progress-striped active">
+					                    <div className="progress-bar" style={fullWidthStyle}></div>
+					                </div>
+					            </div>
+				            	: null
+				        	}
 				        	<ul>
 					        {this.state.workouts.map(function(workout, i) {
 					            return <flog.WorkoutListItem workout={workout} />;

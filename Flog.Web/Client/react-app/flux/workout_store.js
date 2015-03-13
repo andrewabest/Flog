@@ -8,14 +8,46 @@
 	  initialize: function() {
 
 	    this.workouts = {};
+	    this.loading = false;
+	    this.error = '';
 
 	    this.bindActions(
+	      flog.flux.actionIdentifiers.WORKOUTS.LOAD, this.handleLoad,
+	      flog.flux.actionIdentifiers.WORKOUTS.LOAD_SUCCESS, this.handleLoadSuccess,
+	      flog.flux.actionIdentifiers.WORKOUTS.LOAD_FAIL, this.handleLoadFail,
 	   	  flog.flux.actionIdentifiers.WORKOUT.ADD, this.handleAdd,
 	   	  flog.flux.actionIdentifiers.WORKOUT.EDIT, this.handleEdit,
 	      flog.flux.actionIdentifiers.WORKOUT.ADD_EXERCISE, this.handleAddExercise,
 	      flog.flux.actionIdentifiers.WORKOUT.REMOVE_EXERCISE, this.handleRemoveExercise,
 	      flog.flux.actionIdentifiers.WORKOUT.ADD_SET, this.handleAddSet
 	    );
+	  },
+
+	  handleLoad: function() {
+
+	  	this.loading = true;
+
+		this.emit('change');
+	  },
+
+	  handleLoadSuccess: function(payload) {
+
+	  	var self = this;
+
+	  	_.each(payload.workouts, function(workout) { self.workouts[workout.id] = workout });
+
+	  	this.loading = false;
+
+		this.emit('change');
+	  },
+
+	  handleLoadFail: function(payload) {
+
+	  	this.error = payload.error;
+
+	  	this.loading = false;
+
+		this.emit('change');
 	  },
 
 	  handleAdd: function(id) {
