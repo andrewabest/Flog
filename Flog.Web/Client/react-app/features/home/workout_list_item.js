@@ -11,7 +11,7 @@
 			
 			var Link = ReactRouter.Link;
 
-			return <li><Link to="editWorkout" params={{id: this.props.workout.id}}>{this.props.workout.display}</Link></li>;
+			return <li><Link to="workout" params={{id: this.props.workout.id}}>{this.props.workout.display}</Link></li>;
 		}
 	});
 

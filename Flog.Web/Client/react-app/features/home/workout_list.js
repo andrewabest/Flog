@@ -1,22 +1,40 @@
-(function(flog) {
+(function(flog, react, fluxxor) {
 	'use strict';
 	
 	flog.WorkoutList = React.createClass({
 
 		propTypes: {
-			workouts: React.PropTypes.array,
+			workouts: React.PropTypes.array
 		},
 
-		getDefaultProps: function() {
-		    return {
-		    	workouts: [{key:0, id:0, display: 'Workout one'}, {key:1, id:1, display: 'Workout two'}]
-		    };
-	  	},
+		mixins: [
+	  		ReactRouter.Navigation, 
+	  		flog.mixins.Authentication,
+	  		fluxxor.FluxMixin(react),
+    		fluxxor.StoreWatchMixin("workout")
+	  	],
 
-	  	mixins: [ReactRouter.Navigation, flog.mixins.Authentication],
+		getStateFromFlux: function() {
+
+			return {
+			  workouts: this.getFlux().store("workout").getWorkouts()
+			};
+		},
 
 		beginWorkout: function() {
-			this.transitionTo('newWorkout');
+			var workoutId = this.getWorkoutId();
+			this.getFlux().actions.workout.add(workoutId);
+			this.transitionTo('workout', { id: workoutId });
+		},
+
+		getWorkoutId: function () {
+		    var d = new Date().getTime();
+		    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		        var r = (d + Math.random()*16)%16 | 0;
+		        d = Math.floor(d/16);
+		        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+		    });
+		    return uuid;
 		},
 
 		render: function() {
@@ -44,7 +62,7 @@
 				    <div className="row" style={workoutRowStyle}>
 				        <div className="col-md-12 well">
 				        	<ul>
-					        {this.props.workouts.map(function(workout, i) {
+					        {this.state.workouts.map(function(workout, i) {
 					            return <flog.WorkoutListItem workout={workout} />;
 					        })}
 					        </ul>
@@ -55,5 +73,5 @@
 		}
 	});
 
-})(window.flog = window.flog || {});
+})(window.flog = window.flog || {}, window.React, window.Fluxxor);
 	

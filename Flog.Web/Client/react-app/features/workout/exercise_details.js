@@ -1,38 +1,47 @@
-(function(flog) {
+(function(flog, react, fluxxor) {
 	'use strict';
 	
 	flog.ExerciseDetails = React.createClass({
 
+		propTypes: {
+			workoutId: React.PropTypes.string.isRequired,
+			exercise: React.PropTypes.object.isRequired,
+		},
+
+		mixins: [
+			fluxxor.FluxMixin(react),
+		],
+
 		getInitialState: function() {
 			return { 
-				addingSet: false,
-				sets: [] 
+				addingSet: false
 			};
 		},
 
 		addSet: function() {
+
 			this.setState({addingSet: true});
 		},
 
-		addSetCompleted: function(set) {
-
-			var sets = this.state.sets;
-			sets.push(set);
-
-			this.setState({
-				sets: sets,
-				addingSet: false
-			});
-		},
-
 		addSetCancelled: function() {
+
 			this.setState({
 				addingSet: false
 			});
 		},
 
 		remove: function() {
-			// TODO
+			
+			this.getFlux().actions.workout.removeExercise(
+				this.props.workoutId,
+		        this.props.exercise.id
+		    );
+		},
+
+		componentWillReceiveProps: function(nextProps) {
+			// Invoked when a component is receiving new props. This method is not called for the initial render.
+			// Use this as an opportunity to react to a prop transition before render() is called by updating the state using this.setState(). The old props can be accessed via this.props. Calling this.setState() within this function will not trigger an additional render.
+			this.setState({addingSet: false});
 		},
 
 		componentDidMount: function() {
@@ -73,14 +82,14 @@
 			    		this.state.addingSet ?
 			    		<div className="row" style={rowStyle}>
 					        <div className="col-md-12 well">
-					            <flog.Set addSetCallback={this.addSetCompleted} closeCallback={this.addSetCancelled} />
+					            <flog.Set workoutId={this.props.workoutId} exerciseId={this.props.exercise.id} closeCallback={this.addSetCancelled} />
 					        </div>
 					    </div>
 					    : null
 			    	}
 
 				    <div className="row" style={rowStyle}>
-				        {this.state.sets.map(function(set, i) {
+				        {this.props.exercise.sets.map(function(set, i) {
 				            return <div className="col-md-12"><p>{set.weight}{' x '}{set.reps}{' @ '}{set.rpe}{' RPE'}</p></div>;
 				        })}
 				    </div>
@@ -89,4 +98,4 @@
 		}
 	});
 
-})(window.flog = window.flog || {});
+})(window.flog = window.flog || {}, window.React, window.Fluxxor);

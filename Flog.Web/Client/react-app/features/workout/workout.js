@@ -1,30 +1,45 @@
-(function(flog, swal) {
+(function(flog, react, fluxxor, swal) {
 	'use strict';
 	
 	flog.Workout = React.createClass({
 
-		mixins: [ReactRouter.Navigation, flog.mixins.Authentication],
+		mixins: [
+			ReactRouter.Navigation, 
+			ReactRouter.State, 
+			flog.mixins.Authentication,
+			fluxxor.FluxMixin(react),
+    		fluxxor.StoreWatchMixin("workout"),
+		],
 
 		getInitialState: function() {
 		    return {
 		    	addingExercise: false,
 		    	isBusy: false,
-		    	isCompleting: false,
-		    	exercises: []
+		    	isCompleting: false
 		    };
 		},
 
-		getDefaultProps: function() {
+		// TODO: Seperate internal state modifications to those influenced by the store changes.
+		getStateFromFlux: function() {
 
-			var date = moment();
-			// this.getParams().Id
+			// Get our route parameters
+			var params = this.getParams();
+			var workout = this.getFlux().store("workout").getWorkout(params.id);
+
+			this.setState({
+				showNoExercisesWarning: workout.exercises.length == 0,
+		    	showCompleteAction: workout.exercises.length > 0,
+		    	addingExercise: false
+			});
+
 			return {
-				workout: { id: null, date: JSON.stringify(date), display: date.format("dddd, MMMM Do YYYY, h:mm a") }
+			  workout: workout
 			};
 		},
 
 		componentWillMount: function() {
 			// Invoked once, both on the client and server, immediately before the initial rendering occurs. If you call setState within this method, render() will see the updated state and will be executed only once despite the state change.
+
 			this.toggleVisibility();
 		},
 
@@ -52,19 +67,6 @@
 			});
 		},
 
-		addExerciseCompleted: function(exercise) {
-
-			var exercises = this.state.exercises;
-			exercises.push(exercise);
-
-			this.setState({
-				exercises: exercises,
-				addingExercise: false
-			});
-
-			this.toggleVisibility();
-		},
-
 		addExerciseCancelled: function() {
 			this.setState({
 				addingExercise: false
@@ -77,14 +79,9 @@
 				isCompleting: true
 			});
 
-			var payload = {};
-			$.extend(payload, this.props.workout);
-			payload.exercises = this.state.exercises;
-
 			var self = this;
 
-			// TODO: make service access nicer.
-			flog.services.workout.completeWorkout(payload)
+			flog.services.workout.completeWorkout(this.state.workout)
 				.done(function(data) {
 	                swal({
 	                    title: "Workout Completed!",
@@ -103,15 +100,12 @@
 
 		toggleVisibility: function() {
 			this.setState({
-				showNoExercisesWarning: !this.state.isBusy && !this.state.addingExercise && this.state.exercises.length == 0,
-		    	showCompleteAction: !this.state.isBusy && this.state.exercises.length > 0
+				showNoExercisesWarning: !this.state.isBusy && !this.state.addingExercise && this.state.workout.exercises.length == 0,
+		    	showCompleteAction: !this.state.isBusy && this.state.workout.exercises.length > 0
 			});
 		},
 
 		render: function () {
-
-			// Get the workout Id supplied via url.
-			//this.getParams().Id
 
 			var rowStyle = {
 				marginBottom: 15
@@ -121,12 +115,14 @@
 				width: '100%'
 			}
 
+			var self = this;
+
 			return (
 				<div>
 				    <div className="page-header">
 				        <div className="row">
 				            <div className="col-md-12">
-				                <h1>Workout {this.props.workout.display}</h1>
+				                <h1>Workout {this.state.workout.display}</h1>
 				            </div>
 				        </div>
 				    </div>
@@ -136,7 +132,7 @@
 				            <div className="exerciseContainer">
 				                {
 				                	this.state.addingExercise ?
-				                	<flog.Exercise className="exercise" addExerciseCallback={this.addExerciseCompleted} closeCallback={this.addExerciseCancelled} />
+				                	<flog.Exercise className="exercise" workoutId={this.state.workout.id} closeCallback={this.addExerciseCancelled} />
 				                	: null
 				                }	
 				            </div>
@@ -154,9 +150,11 @@
 
 				    <div>
 				    	<ul>
-					        {this.state.exercises.map(function(exercise, i) {
-					            return <flog.ExerciseDetails exercise={exercise} />;
-					        })}
+					        {
+					        	this.state.workout.exercises.map(function(exercise, i) {
+					            	return <flog.ExerciseDetails workoutId={self.state.workout.id} exercise={exercise} />;
+					        	})
+					        }
 				        </ul>
 				    </div>
 
@@ -187,4 +185,4 @@
 		}
 	});
 
-})(window.flog = window.flog || {}, swal);
+})(window.flog = window.flog || {}, window.React, window.Fluxxor, swal);

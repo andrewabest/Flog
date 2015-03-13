@@ -1,14 +1,18 @@
-(function(flog) {
+(function(flog, react, fluxxor) {
 	'use strict';
 	
 	flog.Set = React.createClass({
 
 		propTypes: {
-			addSetCallback: React.PropTypes.func.isRequired,
+			workoutId: React.PropTypes.string.isRequired,
+			exerciseId: React.PropTypes.string.isRequired,
 			closeCallback: React.PropTypes.func.isRequired
 		},
 
-		mixins: [React.addons.LinkedStateMixin],
+		mixins: [
+			React.addons.LinkedStateMixin,
+			fluxxor.FluxMixin(react)
+		],
 
 		getInitialState: function() {
 			return {weight: '', reps: '', rpe: ''};
@@ -16,7 +20,14 @@
 
 		handleSubmission: function(e) {
 			e.preventDefault();
-			this.props.addSetCallback({weight: this.state.weight, reps: this.state.reps, rpe: this.state.rpe});
+			
+			this.getFlux().actions.workout.addSet(
+				this.props.workoutId,
+				this.props.exerciseId,
+		        this.state.weight,
+		        this.state.reps,
+		        this.state.rpe
+		    );
 		},
 
 		cancel: function(e) {
@@ -56,4 +67,4 @@
 		}
 	});
 
-})(window.flog = window.flog || {});
+})(window.flog = window.flog || {}, window.React, window.Fluxxor);

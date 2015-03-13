@@ -1,9 +1,14 @@
-(function(flog) {
+(function(flog, react, fluxxor) {
 	'use strict';
 
 	flog.Login = React.createClass({
 
-		mixins: [React.addons.LinkedStateMixin, ReactRouter.Navigation, ReactRouter.State],
+		mixins: [
+			React.addons.LinkedStateMixin, 
+			ReactRouter.Navigation, 
+			ReactRouter.State,
+			fluxxor.FluxMixin(react)
+		],
 
 		getInitialState: function() {
 			return { email: '', password: '', rememberMe: false};
@@ -62,5 +67,5 @@
 		}
 	});
 
-})(window.flog = window.flog || {});
+})(window.flog = window.flog || {}, window.React, window.Fluxxor);
 

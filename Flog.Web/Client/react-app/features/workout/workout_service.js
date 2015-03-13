@@ -11,8 +11,13 @@
 
         function completeWorkout(workout) {
 
-            return $.post('/workout/complete', workout);
-
+            return $.ajax({
+                contentType: 'application/json',
+                data: JSON.stringify(workout),
+                dataType: 'json',
+                type: 'POST',
+                url: '/workout/complete'
+            });
         }
 
         function getWorkouts() {

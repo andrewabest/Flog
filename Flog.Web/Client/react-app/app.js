@@ -13,7 +13,7 @@
 
 	    render: function(){
 	        return (
-	        	<RouteHandler />
+	        	<RouteHandler {...this.props} />
 	        );
 	    }
 	});
@@ -22,14 +22,25 @@
 		<Route path="/" handler={App}>
 			<Route name="login" handler={flog.Login}/>
 			<Route name="workoutList" path="react" handler={flog.WorkoutList} />
-			<Route name="newWorkout" path="react/new" handler={flog.Workout} />
-			<Route name="editWorkout" path="react/:id" handler={flog.Workout} />
+			<Route name="workout" path="react/:id" handler={flog.Workout} />
 			<NotFoundRoute handler={flog.NotFound}/>
 	  	</Route>
 	);
 
+	var router = Router.create({routes: routes});
+
+	var stores = {
+	  workout: new flog.flux.WorkoutStore(),
+	  route: new flog.flux.RouteStore({router: router})
+	};
+
+	var flux = new Fluxxor.Flux(stores, flog.flux.actions);
+	flux.on("dispatch", function(type, payload) {
+		console.log("Dispatch:", type, payload);
+	});
+
 	Router.run(routes, Router.HistoryLocation, function (Handler) {
-	  React.render(<Handler/>, document.getElementById('app'));
+	  React.render(<Handler flux={flux} />, document.getElementById('app'));
 	});
 
 	window.loading_screen.finish();
