@@ -16,10 +16,6 @@
       ADD_EXERCISE: "EXERCISE:ADD",
       REMOVE_EXERCISE: "EXERCISE:REMOVE",
       ADD_SET: "SET:ADD",
-    },
-
-    ROUTE: {
-      TRANSITION: "ROUTE:TRANSITION"
     }
   };
 
@@ -80,12 +76,6 @@
         });
       },
 
-    },
-
-    route: {
-      transition: function(path, params) {
-        this.dispatch(flog.flux.actionIdentifiers.ROUTE.TRANSITION, {path: path, params: params});
-      }
     }
   };
 

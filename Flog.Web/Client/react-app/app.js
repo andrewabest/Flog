@@ -30,8 +30,7 @@
 	var router = Router.create({routes: routes});
 
 	var stores = {
-	  workout: new flog.flux.WorkoutStore(),
-	  route: new flog.flux.RouteStore({router: router})
+	  workout: new flog.flux.WorkoutStore()
 	};
 
 	var flux = new Fluxxor.Flux(stores, flog.flux.actions);
