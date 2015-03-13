@@ -6,6 +6,11 @@ body > .inner { display: none; }
 
 body.pg-loaded > .inner { display: block; }
 
+ul {
+    list-style-type: none;
+    margin-left: -40px;
+}
+
 /* 
     Spinner courtesy of http://tobiasahlin.com/spinkit/
 */
