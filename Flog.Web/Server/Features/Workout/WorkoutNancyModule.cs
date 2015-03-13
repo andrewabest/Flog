@@ -27,7 +27,7 @@ namespace Flog.Web.Server.Features.Workout
 
             documentStore.Put(details);
 
-            return HttpStatusCode.OK;
+            return Response.AsJson(string.Empty, HttpStatusCode.OK);
         }
 
         private async Task<dynamic> GetAllWorkouts(IDocumentStore documentStore)
