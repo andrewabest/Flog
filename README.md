@@ -19,3 +19,7 @@ Flog
 * Figuring out how to get animations to actually work in Angular 1.3 (tried and failed)
 * Testing! It is all feeling a little fragile at the moment due to the lack of static typing or tests to make up for the lack thereof
 
+FRog
+====
+
+There is a React version of the application nestled within the /React route - created for fun and profit :)
