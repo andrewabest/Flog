@@ -22,4 +22,4 @@ Flog
 FRog
 ====
 
-There is a React version of the application nestled within the /React route - created for fun and profit :)
+There is a React version of the application nestled within the /React route - created for fun and profit :) I gave a short presentation on the tconversion process, the slides for which can be found at https://speakerdeck.com/andrewabest/seven-year-itch
